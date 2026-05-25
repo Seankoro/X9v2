@@ -1,3 +1,15 @@
+---
+title: "X9v2 Resubmission Report"
+author: "Loo Zhi Yi & Sean Koh"
+date: "26 May, 2026"
+geometry: "top=2cm, bottom=2cm, left=2.5cm, right=2.5cm"
+fontsize: 10pt
+highlight: tango
+titlepage: false
+listings-no-page-break: true
+code-block-font-size: \scriptsize
+output: pdf_document
+---
 # Group 19 - X9v2 Resubmission Report
 
 Members: Loo Zhi Yi, Sean Elisha Koh Tze Li
@@ -20,7 +32,6 @@ On startup, `X9Application` calls `setPersistenceEnabled(true)` so the app can r
 
 `TrafficReport` is annotated with `@IgnoreExtraProperties` so that Firebase does not crash if the database contains fields the class does not define. Every field has a default value because Firebase's `getValue()` needs a no-arg constructor to deserialize snapshots. Severity is stored as an `Int` (1–5) instead of an enum since Firebase handles primitive types natively and an enum would require a custom serializer.
 
-\small
 ```kotlin
 @IgnoreExtraProperties
 data class TrafficReport(
@@ -36,7 +47,6 @@ data class TrafficReport(
     val updatedAt: Long? = null,
 )
 ```
-\normalsize
 
 The ViewModel also defines 2 supporting data classes. `ReportEntry` pairs a `TrafficReport` with its Firebase database key so that reports can be identified for updates and deletes. `ReportUiState` holds the list of `ReportEntry` objects that the UI screens observe through `StateFlow`.
 
@@ -50,7 +60,7 @@ The app has 6 screens (see Appendix for screenshots). Navigation uses a bottom b
 
 **Report List** (Figure 2): A `LazyColumn` of report cards showing type, severity, address, description preview, timestamp and an optional photo thumbnail loaded with Coil's `AsyncImage`. Filter chips at the top narrow down by traffic type with a count like "3 of 12 reports". Swiping is only enabled on reports the user created. Left-to-right opens the edit form while right-to-left triggers delete.
 
-**Report Form** (Figure 3): Handles both creating and editing reports. An `ExposedDropdownMenuBox` picks the traffic type. An `OutlinedTextField` takes the description with validation. A `Slider` sets severity from 1 to 5 with colour-coded labels. 2 buttons attach a photo via camera (`TakePicture` + `FileProvider`) or gallery (`GetContent`). GPS coordinates come from `LocationService` and are reverse geocoded into an address. All fields use `rememberSaveable` to survive rotation. A `BackHandler` shows a discard dialog if there is unsaved input.
+**Report Form** (Figure 3): Handles both creating and editing reports. An `ExposedDropdownMenuBox` picks the traffic type. An `OutlinedTextField` takes the description with validation. A `Slider` sets severity from 1 to 5 with color-coded labels. 2 buttons attach a photo via camera (`TakePicture` + `FileProvider`) or gallery (`GetContent`). GPS coordinates come from `LocationService` and are reverse geocoded into an address. All fields use `rememberSaveable` to survive rotation. A `BackHandler` shows a discard dialog if there is unsaved input.
 
 **Report Detail** (Figures 4–5): Shows the full report with sections separated by `HorizontalDivider`. Edit and Delete buttons only appear if the current user created the report, matching the same ownership rule as the swipe actions in the list.
 
@@ -68,7 +78,7 @@ The app has 6 screens (see Appendix for screenshots). Navigation uses a bottom b
 
 3. **Reverse geocoding**: All screens that display report locations run `Geocoder.getFromLocation()` on `Dispatchers.IO` to show a readable address instead of raw coordinates. We applied this on every screen that shows a location because raw latitude and longitude numbers are not useful to a user reading a traffic report.
 
-4. **Directional swipe actions**: Swiping left-to-right on a report card opens edit and right-to-left deletes it. Both directions show coloured backgrounds with icons. Swipe is disabled for reports the user did not create. This saves time compared to opening the detail screen to edit or delete.
+4. **Directional swipe actions**: Swiping left-to-right on a report card opens edit and right-to-left deletes it. Both directions show colored backgrounds with icons. Swipe is disabled for reports the user did not create. This saves time compared to opening the detail screen to edit or delete.
 
 5. **Back-press discard guard**: Pressing back on the report form with unsaved input shows an `AlertDialog` asking whether to discard or keep editing. This prevents losing a partially filled form by accident.
 
@@ -103,7 +113,7 @@ Testing was done on both a physical device and the Android Studio emulator. The 
 
 4. **Geocoder returning null on emulator**
 
-    - **Problem:** While testing on the emulator, `Geocoder.getFromLocation()` would return null or an empty list, which caused the app to crash. The emulator's geocoder backend did not always resolve coordinates into addresses reliably.
+    - **Problem:** While testing on the emulator, `Geocoder.getFromLocation()` would return null or an empty list, which caused the app to crash. The emulator's Geocoder backend did not always resolve coordinates into addresses reliably.
     - **Resolution:** We wrapped every `Geocoder` call in a try-catch on `Dispatchers.IO` so that if it returns null, throws an exception, or returns an empty list, the app falls back to showing no address. This is applied on all screens that display a location. The app still functions normally without geocoding. The address line simply does not appear.
 
 5. **Deprecated LocalBroadcastManager**
@@ -111,19 +121,18 @@ Testing was done on both a physical device and the Android Studio emulator. The 
     - **Problem:** `LocalBroadcastManager`, which we use in `LocationService` to send GPS updates to the report form, is deprecated. Android Studio flags every usage with a warning. The recommended replacements are `SharedFlow` or `LiveData`, but both would require restructuring the service layer and adding coroutine or lifecycle dependencies to the service.
     - **Resolution:** Since the broadcast only travels within our own app and does not expose data to other apps, we decided to keep `LocalBroadcastManager` and suppress the warning with `@file:Suppress("DEPRECATION")`. The simpler implementation was worth the tradeoff given the limited scope of the broadcast.
 
-\newpage
-
 ## Appendix: Screenshots
 
-\begin{figure}[H]
-\centering
-\begin{minipage}{0.31\textwidth}\centering\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{img/Dashboard.png}\\{\scriptsize Figure 1: Dashboard}\end{minipage}\hfill
-\begin{minipage}{0.31\textwidth}\centering\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{img/ReportList.png}\\{\scriptsize Figure 2: Report List}\end{minipage}\hfill
-\begin{minipage}{0.31\textwidth}\centering\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{img/ReportForm.png}\\{\scriptsize Figure 3: Report Form}\end{minipage}
-\vspace{0.3cm}
+![Figure 1](img/Dashboard.png)
 
-\begin{minipage}{0.23\textwidth}\centering\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{img/ReportDetail1.png}\\{\scriptsize Figure 4: Detail}\end{minipage}\hfill
-\begin{minipage}{0.23\textwidth}\centering\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{img/ReportDetail2.png}\\{\scriptsize Figure 5: Detail (scrolled)}\end{minipage}\hfill
-\begin{minipage}{0.23\textwidth}\centering\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{img/Map.png}\\{\scriptsize Figure 6: Map}\end{minipage}\hfill
-\begin{minipage}{0.23\textwidth}\centering\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{img/Profile.png}\\{\scriptsize Figure 7: Profile}\end{minipage}
-\end{figure}
+![Figure 2](img/ReportList.png)
+
+![Figure 3](img/ReportForm.png)
+
+![Figure 4](img/ReportDetail1.png)
+
+![Figure 5](img/ReportDetail2.png)
+
+![Figure 6](img/Map.png)
+
+![Figure 7](img/Profile.png)
