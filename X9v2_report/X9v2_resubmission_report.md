@@ -78,11 +78,9 @@ The app has 6 screens (see Appendix for screenshots). Navigation uses a bottom b
 
 ## Testing and Evaluation
 
-The project has 20 JUnit unit tests in `TrafficReportTest.kt` covering the `TrafficReport` data class and common list operations. These include default field values, `copy()` preserving unchanged fields, filter-by-type logic, sort-by-timestamp ordering, location presence checks, severity range validation, `take(3)` for dashboard reports, owner permission checks, description trimming and blank rejection, and image URL presence checks.
+We did manual smoke testing after each feature was added. This covered the full navigation flow across all 6 screens, creating and editing reports with all field types, submitting with a blank description to trigger validation, swipe-to-edit and swipe-to-delete on owned and non-owned reports, camera and gallery photo attachment, image upload and display, map markers and the bottom info card, dark mode toggle and persistence across restarts, filter chips with type counts, reverse geocoding on all screens that display a location, the back-press discard guard on the report form, form state preservation across device rotation, location permission prompts, sign-in with Google and email, and sign-out returning to the login screen.
 
-We also did manual smoke testing after each feature was added: form validation, full navigation flow, swipe-to-delete, camera and gallery attachment, dark mode persistence, rotation handling, filter chips, reverse geocoding and the back-press discard guard.
-
-Testing was done on both a physical device and the Android Studio emulator. The physical device tested real camera and GPS behaviour. The emulator was used for spoofing GPS locations to verify map markers and geocoded addresses.
+Testing was done on both a physical device and the Android Studio emulator. The physical device tested real camera capture, GPS location and photo uploads. The emulator was used for spoofing GPS coordinates to verify map markers and geocoded addresses at different locations.
 
 ---
 
