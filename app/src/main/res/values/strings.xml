@@ -1,0 +1,83 @@
+<resources>
+  <!-- App -->
+  <string name="app_name">X9v2</string>
+
+  <!-- Report form -->
+  <string name="msg_report_submitted">Report submitted</string>
+  <string name="msg_report_updated">Report updated</string>
+  <string name="title_new_report">New Report</string>
+  <string name="title_edit_report">Edit Report</string>
+  <string name="label_type">Type of report</string>
+  <string name="hint_description">Situation description…</string>
+  <string name="label_description">Description</string>
+  <string name="label_severity">Severity Level (1–5)</string>
+  <string name="button_submit">Submit Report</string>
+  <string name="error_empty_description">Description cannot be empty!</string>
+  <string name="label_photo">Photo (optional)</string>
+  <string name="button_camera">Camera</string>
+  <string name="button_gallery">Gallery</string>
+  <string name="discard_report_title">Discard Report?</string>
+  <string name="discard_report_message">You have unsaved changes. Are you sure you want to go
+    back?</string>
+  <string name="keep_editing">Keep Editing</string>
+  <string name="discard">Discard</string>
+
+  <!-- Report list -->
+  <string name="subtitle_text">Traffic Reports</string>
+  <string name="report_count">%1$d report(s)</string>
+  <string name="severity_display">Severity: %1$d/5</string>
+  <string name="filter_all">All</string>
+  <string name="filtered_count">%1$d of %2$d reports</string>
+
+  <!-- Report detail -->
+  <string name="delete_label">Delete</string>
+  <string name="cancel_label">Cancel</string>
+  <string name="edit_label">Edit</string>
+  <string name="dialog_delete_title">Delete Report?</string>
+  <string name="dialog_delete_message">This report will be permanently removed.</string>
+
+  <!-- Dashboard -->
+  <string name="msg_no_reports">No reports yet.</string>
+  <string name="greeting_morning">Good morning</string>
+  <string name="greeting_afternoon">Good afternoon</string>
+  <string name="greeting_evening">Good evening</string>
+  <string name="section_recent_reports">Recent Reports</string>
+  <string name="quick_action_new_report">New Report</string>
+  <string name="quick_action_view_map">View Map</string>
+  <string name="btn_view_all">View all →</string>
+
+  <!-- Navigation -->
+  <string name="nav_home">Home</string>
+  <string name="nav_reports">Reports</string>
+  <string name="nav_map">Map</string>
+  <string name="nav_profile">Profile</string>
+
+  <!-- Login -->
+  <string name="msg_sign_in_success">Signed in successfully.</string>
+  <string name="msg_auth_failed">Authentication failed.</string>
+
+  <!-- Map -->
+  <string name="permission_denied_message">Location permission denied</string>
+
+  <!-- Location service -->
+  <string name="location_tracking">Tracking your location</string>
+  <string name="location_channel_name">Location Updates</string>
+
+  <!-- Profile -->
+  <string name="label_dark_mode">Dark Mode</string>
+  <string name="sign_out_label">Sign Out</string>
+
+  <!-- Content descriptions -->
+  <string name="cd_back">Back</string>
+  <string name="cd_add_report">Add Report</string>
+  <string name="cd_report_photo">Report photo</string>
+  <string name="cd_view_report">View full report</string>
+
+  <!-- Traffic types -->
+  <string-array name="traffic_types">
+    <item>Speed Camera</item>
+    <item>Heavy Traffic</item>
+    <item>Accident</item>
+    <item>Road Work</item>
+  </string-array>
+</resources>
