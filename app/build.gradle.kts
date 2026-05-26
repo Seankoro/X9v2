@@ -5,13 +5,20 @@
     alias(libs.plugins.secrets.gradle)
 }
 
+// AGP bundles the Kotlin Android plugin on the classpath but doesn't apply it automatically.
+// Using apply() bypasses Gradle's version-check guard that blocks the plugins{} block approach.
+apply(plugin = "org.jetbrains.kotlin.android")
+
+// apply() doesn't generate type-safe accessors, so configure JVM target via tasks API.
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile::class.java).configureEach {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
+}
+
 android {
     namespace = "dk.itu.moapd.x9.s25134"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "dk.itu.moapd.x9.s25134"
