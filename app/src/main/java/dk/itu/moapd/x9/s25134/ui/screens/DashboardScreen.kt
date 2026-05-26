@@ -36,7 +36,7 @@ fun DashboardScreen(
         in 12..17 -> stringResource(R.string.greeting_afternoon)
         else -> stringResource(R.string.greeting_evening)
     }
-    // Beginning of Dashboard Screen
+    // Dashboard Layout
     Column(
         modifier = Modifier
             .fillMaxSize()

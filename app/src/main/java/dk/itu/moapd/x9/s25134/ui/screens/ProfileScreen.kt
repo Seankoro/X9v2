@@ -22,15 +22,12 @@ fun ProfileScreen(
     onSignOut: () -> Unit = {},
     onDarkModeChanged: (Boolean) -> Unit = {},
 ) {
-    // Get currently signed-in Firebase user
     val user = FirebaseAuth.getInstance().currentUser
     val context = LocalContext.current
-    // SharedPreferences
     val prefs = context.getSharedPreferences(X9Application.PREFS_NAME, Context.MODE_PRIVATE)
-    // Read saved dark mode preference
     var darkMode by remember { mutableStateOf(prefs.getBoolean("dark_mode", false)) }
 
-    // Layout
+    // Profile Layout
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -62,9 +59,7 @@ fun ProfileScreen(
                 style = MaterialTheme.typography.bodyLarge
             )
             Switch(
-                // Update local state
                 checked = darkMode,
-                // Persist to SharedPreferences
                 onCheckedChange = { enabled ->
                     darkMode = enabled
                     prefs.edit { putBoolean("dark_mode", enabled) }

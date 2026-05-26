@@ -18,7 +18,7 @@ import dk.itu.moapd.x9.s25134.R
 
 /**
  * The bottom navigation bar shown on every screen except login.
- * Five destinations: Home, Reports, Add (Centre FAB), Map, Profile.
+ * Five destinations: Home, Reports, Add (Centre Floating Action Button), Map, Profile.
  */
 @Composable
 fun X9BottomBar(
@@ -97,9 +97,7 @@ fun X9BottomBar(
     }
 }
 
-/**
- * A single tab in the bottom navigation bar.
- */
+/** A single icon-and-label navigation item in the navigation bar. */
 @Composable
 private fun BottomNavItem(
     icon: ImageVector,

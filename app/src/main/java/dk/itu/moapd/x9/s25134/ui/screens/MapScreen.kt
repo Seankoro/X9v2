@@ -91,7 +91,7 @@ fun MapScreen(
     val selectedEntry = selectedReportKey?.let { key ->
         state.reports.find { it.key == key }
     }
-    // Layout
+    // Map Layout
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { padding ->

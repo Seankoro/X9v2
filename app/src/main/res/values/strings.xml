@@ -73,6 +73,16 @@
   <string name="cd_report_photo">Report photo</string>
   <string name="cd_view_report">View full report</string>
 
+  <!-- Severity labels (indexed 0–5 but 0 is unused) -->
+  <string-array name="severity_labels">
+    <item>Unknown</item>
+    <item>Minor (1/5)</item>
+    <item>Low (2/5)</item>
+    <item>Moderate (3/5)</item>
+    <item>High (4/5)</item>
+    <item>Critical (5/5)</item>
+  </string-array>
+
   <!-- Traffic types -->
   <string-array name="traffic_types">
     <item>Speed Camera</item>

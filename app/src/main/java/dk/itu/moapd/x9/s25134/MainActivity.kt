@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
                 val currentRoute = backStackEntry?.destination?.route
                 val reportViewModel: ReportViewModel = viewModel()
 
+                // Main scaffold with bottom navigation
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
@@ -80,6 +81,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) { innerPadding ->
+                    // Screen navigation
                     NavHost(
                         navController = navController,
                         startDestination = NavRoutes.HOME,
@@ -180,9 +182,6 @@ class MainActivity : ComponentActivity() {
         auth.currentUser ?: startLoginActivity()
     }
 
-    /**
-     * Signs the user out using FirebaseUI and redirects to [LoginActivity].
-     */
     private fun signOut() {
         AuthUI.getInstance()
             .signOut(this)
@@ -191,9 +190,6 @@ class MainActivity : ComponentActivity() {
             }
     }
 
-    /**
-     * Starts [LoginActivity] and finishes this activity so the user cannot navigate back.
-     */
     private fun startLoginActivity() {
         Intent(this, LoginActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

@@ -52,6 +52,7 @@ val SeverityModerate = Color(0xFFFFC107)
 val SeverityHigh = Color(0xFFFF9800)
 val SeverityCritical = Color(0xFFF44336)
 
+/** Maps a severity level (1–5) to its display colour. */
 fun severityColor(level: Int): Color = when (level) {
     1 -> SeverityMinor
     2 -> SeverityLow

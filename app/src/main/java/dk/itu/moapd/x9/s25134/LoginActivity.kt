@@ -20,7 +20,6 @@ class LoginActivity : ComponentActivity() {
         onSignInResult(result)
     }
 
-    // Immediately launch sign-in screen when LoginActivity opens
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         createSignInIntent()
@@ -58,7 +57,6 @@ class LoginActivity : ComponentActivity() {
     private fun startMainActivity() {
         Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(this)
-        }
+        }.let(::startActivity)
     }
 }

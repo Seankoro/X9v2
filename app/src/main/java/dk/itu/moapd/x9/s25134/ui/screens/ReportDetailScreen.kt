@@ -73,7 +73,7 @@ fun ReportDetailScreen(
         }
     }
 
-    // Beginning of Report Detail Screen
+    // Report Detail Layout
     Column(
         modifier = Modifier
             .fillMaxSize()

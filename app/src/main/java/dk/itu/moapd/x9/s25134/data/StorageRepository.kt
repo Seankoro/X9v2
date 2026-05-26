@@ -14,6 +14,7 @@ class StorageRepository(
 
     fun uploadImage(localUri: Uri, remotePath: String): Task<Uri> {
         val ref: StorageReference = storage.reference.child(remotePath)
+        // Upload file, then chain a second task to get the download URL
         return ref.putFile(localUri).continueWithTask { task ->
             if (!task.isSuccessful) {
                 throw (task.exception ?: Exception("Upload failed"))

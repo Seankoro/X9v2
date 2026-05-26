@@ -49,6 +49,7 @@ fun ReportFormScreen(
     val context = LocalContext.current
     val user = FirebaseAuth.getInstance().currentUser
     val trafficTypes = stringArrayResource(R.array.traffic_types)
+    val severityLabels = stringArrayResource(R.array.severity_labels)
 
     val reportUpdatedMsg = stringResource(R.string.msg_report_updated)
     val reportSubmittedMsg = stringResource(R.string.msg_report_submitted)
@@ -177,7 +178,7 @@ fun ReportFormScreen(
         }
     }
 
-    // Beginning of Report Form Screen
+    // Report Form Layout
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -261,7 +262,7 @@ fun ReportFormScreen(
         )
         // Severity label
         Text(
-            text = severityLabel(severity.toInt()),
+            text = severityLabels[severity.toInt()],
             style = MaterialTheme.typography.bodyMedium,
             color = severityColor
         )
@@ -386,13 +387,4 @@ fun ReportFormScreen(
             }
         )
     }
-}
-
-private fun severityLabel(level: Int): String = when (level) {
-    1 -> "Minor (1/5)"
-    2 -> "Low (2/5)"
-    3 -> "Moderate (3/5)"
-    4 -> "High (4/5)"
-    5 -> "Critical (5/5)"
-    else -> "Unknown"
 }

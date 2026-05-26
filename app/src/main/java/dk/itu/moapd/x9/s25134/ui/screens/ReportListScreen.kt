@@ -59,7 +59,7 @@ fun ReportListScreen(
         state.reports.filter { it.report.type == selectedFilter }
     }
 
-    // Beginning of Report List Screen
+    // Report List Layout
     Column(modifier = Modifier.fillMaxSize()) {
         // Title
         Text(
@@ -213,7 +213,7 @@ private fun ReportCard(
             }
         }
     }
-    // Beginning of Report card
+    // Report Card Layout
     Card(
         onClick = onClick,
         modifier = Modifier.fillMaxWidth()

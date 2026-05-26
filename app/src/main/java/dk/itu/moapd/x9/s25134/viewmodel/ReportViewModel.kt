@@ -37,10 +37,9 @@ class ReportViewModel(
         private const val IMAGES = "report-images"
     }
 
-    // Private mutable state that only ViewModel can write to
+    // Private mutable state
     private val _uiState = MutableStateFlow(ReportUiState())
-
-    // Public read-only state that screens collect report data from
+    // Public read-only state observed by UI screens
     val uiState: StateFlow<ReportUiState> = _uiState
 
     private var listener: ValueEventListener? = null
@@ -49,7 +48,7 @@ class ReportViewModel(
         observeReports()
     }
 
-    // Listen for changes in the reports node and update UI state
+    /** Observe the changes in the Firebase Realtime Database. */
     private fun observeReports() {
         val query = reportRepository.reportsQuery()
 
@@ -75,6 +74,7 @@ class ReportViewModel(
         query.addValueEventListener(valueListener)
     }
 
+    /** Removes the Firebase listener to prevent memory leaks when the ViewModel is destroyed. */
     override fun onCleared() {
         super.onCleared()
         listener?.let {
@@ -82,7 +82,7 @@ class ReportViewModel(
         }
     }
 
-    // Adds a new report. Uploads the image first if one is provided.
+    /** Adds a new report. Uploads the image first if one is provided. */
     fun addReport(report: TrafficReport, imageUri: Uri? = null) {
         if (imageUri == null) {
             reportRepository.addReport(report)
@@ -101,7 +101,7 @@ class ReportViewModel(
             }
     }
 
-    // Updates an existing report. Uploads a new image first if one is provided.
+    /** Updates an existing report. Uploads a new image first if one is provided. */
     fun updateReport(key: String, report: TrafficReport, imageUri: Uri? = null) {
         if (imageUri == null) {
             reportRepository.updateReport(key, report)
@@ -120,7 +120,7 @@ class ReportViewModel(
             }
     }
 
-    // Deletes a report and its image from storage if it has one.
+    /** Deletes a report and its image from storage if it has one. */
     fun deleteReport(key: String, imageUrl: String = "") {
         if (imageUrl.isEmpty()) {
             reportRepository.deleteReport(key)

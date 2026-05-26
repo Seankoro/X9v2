@@ -21,18 +21,12 @@ class ReportRepository(
 
     fun currentUserId(): String? = auth.currentUser?.uid
 
-    fun reportsQuery(): Query = database.child(REPORTS)
-                                        .orderByChild(CREATED_AT)
+    fun reportsQuery(): Query =
+        database.child(REPORTS).orderByChild(CREATED_AT)
 
     fun addReport(report: TrafficReport) {
-        val key = database
-                    .child(REPORTS)
-                    .push()
-                    .key ?: return
-                  database
-                    .child(REPORTS)
-                    .child(key)
-                    .setValue(report)
+        val key = database.child(REPORTS).push().key ?: return
+        database.child(REPORTS).child(key).setValue(report)
     }
 
     fun updateReport(key: String, report: TrafficReport) {

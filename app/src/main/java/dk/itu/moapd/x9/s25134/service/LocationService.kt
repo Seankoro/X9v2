@@ -33,6 +33,7 @@ class LocationService : Service() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
 
+    /** Initialises the location client and defines the callback for GPS updates. */
     override fun onCreate() {
         super.onCreate()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -51,8 +52,8 @@ class LocationService : Service() {
         }
     }
 
+    /** Starts the foreground notification and begins requesting GPS updates. */
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        // Android requires a visible notification for foreground services
         createNotificationChannel()
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(getString(R.string.app_name))
@@ -64,6 +65,7 @@ class LocationService : Service() {
         return START_STICKY
     }
 
+    /** Creates the notification channel required by Android O+ for foreground services. */
     private fun createNotificationChannel() {
         val channel = NotificationChannel(
             CHANNEL_ID,
@@ -74,6 +76,7 @@ class LocationService : Service() {
             .createNotificationChannel(channel)
     }
 
+    /** Registers for high-accuracy GPS updates at the configured interval. */
     private fun requestLocationUpdates() {
         val request = LocationRequest.Builder(
             Priority.PRIORITY_HIGH_ACCURACY, UPDATE_INTERVAL
@@ -87,12 +90,12 @@ class LocationService : Service() {
         }
     }
 
-    // Stop GPS updates when the service is destroyed
+    /** Stops GPS updates when the service is destroyed. */
     override fun onDestroy() {
         super.onDestroy()
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
-    // Returns null because this is a started service, not a bound service
+    /** Not a bound service, so return null. */
     override fun onBind(intent: Intent?): IBinder? = null
 }
