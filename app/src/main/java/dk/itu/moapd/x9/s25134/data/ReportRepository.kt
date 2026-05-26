@@ -31,13 +31,13 @@ class ReportRepository(
 
     fun updateReport(key: String, report: TrafficReport) {
         database.child(REPORTS)
-                .child(key)
-                .setValue(report)
+            .child(key)
+            .setValue(report)
     }
 
     fun deleteReport(key: String) {
         database.child(REPORTS)
-                .child(key)
-                .removeValue()
+            .child(key)
+            .removeValue()
     }
 }

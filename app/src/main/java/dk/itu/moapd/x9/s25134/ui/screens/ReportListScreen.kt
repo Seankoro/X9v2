@@ -1,4 +1,4 @@
-﻿package dk.itu.moapd.x9.s25134.ui.screens
+package dk.itu.moapd.x9.s25134.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -102,7 +102,6 @@ fun ReportListScreen(
         // Auto-scroll to top when filter changes
         val listState = rememberLazyListState()
         LaunchedEffect(selectedFilter) { listState.animateScrollToItem(0) }
-
 
         SnackbarHost(hostState = snackbarHostState)
 
